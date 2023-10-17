@@ -1,0 +1,101 @@
+{% extends "main.html" %}
+
+
+
+
+
+
+{% block content %}
+
+<div class='py-5'>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow product_data">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {% for item in prod %}
+
+                                {% if item.tag %}
+                                <label class="product-viewtag">{{item.tag}}</label>
+                                
+                                {% endif %}
+
+                                <img src="{{item.product_image.url}}" alt="">
+                            </div>    
+                            <div class="col-md-8">
+                                <h2 class="mb-0">
+                                    {{item.name}}
+                                    {% if item.trending %}
+                                    <label for="trending" style="font-size: 16px;" class="float-end badge bg-danger trending_tag">{{item.trending}}</label>
+                                    {% endif %}
+                                </h2>
+                                <hr>
+                                <label for="" class="me-3">original price:<s>rs {{item.product_price}}</s></label>
+                                <label for="" class="me-3">selling price:rs {{item.selling_price}}</label>
+                                <p class="mt-3">
+                                    {{item.small_description}}
+
+                                </p>
+                                <hr>
+                                {% if item.quantity > 0 %}
+                                <label for="" class="badge bg-success">instock</label>
+                                {% else %}
+                                <label for=""> out of stock</label>
+
+                                {% endif %}
+                                <div class="row mt-2">
+                                    <div class="col-md-3">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ item.id }}" class="prod_id">
+                                        <label for="quantity" >quantity</label>
+                                        <div class="input-group text-center mb-3" style="width: 130px;">
+                                            <button class="input-group-text decrement-button">-</button>
+                                            <input type="text" name="quantity" class="form-control qty-input text-center" value="1">
+                                            <button class="input-group-text increment-button">+</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-9">
+                                        <br>
+                                        {% if item.quantity > 0 %}
+                                            <button type="button" class="btn btn-primary me-3 float-start addtocartbtn" >add to cart <i class="fa fa-shopping-cart"></i></button>
+
+                                        {% endif %}
+                                            <button type="button" class="btn btn-success me-3 float-start addtowishlistbtn" >add to wishlist <i></i></button>
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <h3>description</h3>
+                                <p class="mt-3">
+                                    {{item.description}}
+                                </p>
+                            </div>
+                                {% endfor %} 
+
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+
+
+
+
+
+
+{% block content %}
+
+<div class='py-5'>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow ">
+                    <div class="card-body cartdata">
+                        {% if Cart %}
+                            {% for Cart in Cart %}
+                            <div class="row product_data">
+                                <div class="col-md-2 my-auto">
+                                    <img src="{{Cart.product.product_image.url}}" alt="" height="70px" width="70px">
+
+                                </div>
+                                <div class="col-md-3 my-auto">
+                                    <h6>{{Cart.product.name}}</h6>
+
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                    <h6><h6>{{Cart.product.selling_price}}</h6></h6>
+
+                                </div>
+                                <div class="col-md-3 my-auto">
+                                    <input type="hidden" class="prod_id" value="{{Cart.product_id}}">
+                                    {% csrf_token %}
+                                    {% if Cart.product.quantity >= Cart.product_qty %}
+                                    <label for="quantity">Quantity</label>
+                                    <div class="input-group text-center mb-3" style="width: 130px;">
+                                            <button class="input-group-text changeQuantity decrement-button">-</button>
+                                            <input type="text" name="quantity" class="form-control qty-input text-center" value="{{Cart.product_qty}}">
+                                            <button class="input-group-text changeQuantity increment-button">+</button>
+
+                                    </div>
+                                    {% else %}
+                                    <h4>out of stock</h4>
+                                    {% endif %} 
+
+                                </div>
+                                <div class="col-md-2 my-auto">
+                                        <button class="btn btn-danger delete-cart-item">remove</button> 
+
+                                </div>
+
+
+                            </div>
+                            
+                            
+                            {% endfor %}
+
+                            <a href="{% url 'checkout' %}" class="btn btn-success">checkout</a>
+                        {% else %}
+                            <h4>your cart is empty</h4>
+                    
+                        {% endif %} 
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
