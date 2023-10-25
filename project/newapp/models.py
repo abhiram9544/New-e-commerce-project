@@ -99,3 +99,15 @@ class orderitem(models.Model):
     def __str__(self):
         return '{}-{}'.format(self.order.id,self.order.tracking_no)
     
+class profile(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    phone=models.CharField(max_length=50,null=False)
+    address=models.TextField(null=False)
+    city=models.CharField(max_length=150,null=False)
+    state=models.CharField(max_length=150,null=False)
+    country=models.CharField(max_length=150,null=False)
+    pincode=models.CharField(max_length=150,null=False)
+    created_at=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.user.username

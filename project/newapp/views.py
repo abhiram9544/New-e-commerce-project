@@ -169,13 +169,34 @@ def checkout(request):
     totalprice=0
     for items in cartitems:
         totalprice=totalprice+ items.product.selling_price * items.product_qty
-
-    context={'totalprice':totalprice,'cartitems':cartitems}   
+    #auto checkout   
+    userprofile=profile.objects.filter(user=request.user).first()
+    context={'totalprice':totalprice,'cartitems':cartitems,'userprofile':userprofile}   
     return render (request,'checkout.html',context)
 
 
 def placeorder(request):
     if request.method=='POST':
+        #auto checkout page
+        currentuser=User.objects.filter(id=request.user.id).first()
+
+        if not currentuser.first_name:
+            currentuser.first_name = request.POST.get('fname')
+            currentuser.last_name = request.POST.get('lname')
+            currentuser.save()
+        
+        if not profile.objects.filter(user=request.user):
+            userprofile=profile()
+            userprofile.user=request.user
+            userprofile.phone=request.POST.get('phonenumber')
+            userprofile.address=request.POST.get('address')
+            userprofile.city=request.POST.get('city')
+            userprofile.state=request.POST.get('state')
+            userprofile.country=request.POST.get('country')
+            userprofile.pincode=request.POST.get('pincode')
+            userprofile.save()
+
+
         neworder=order()
         neworder.user=request.user
         neworder.fname=request.POST.get('fname')
@@ -217,7 +238,7 @@ def placeorder(request):
             orderproduct=Product.objects.filter(id=item.product_id).first()
             orderproduct.quantity=orderproduct.quantity-item.product_qty
             orderproduct.save()
-
+        #to clear user cart
         cart.objects.filter(user=request.user).delete()
         messages.success(request,"your order placed")    
 
