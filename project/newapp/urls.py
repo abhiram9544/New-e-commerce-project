@@ -20,7 +20,11 @@ urlpatterns = [
     path('deletewishlist',views.deletewishlist,name='deletewishlist'),
 
     path('checkout',views.checkout,name='checkout'),
-    path('placeorder',views.placeorder,name='placeorder')
+    path('placeorder',views.placeorder,name='placeorder'),
+
+
+    path('myorders',views.myorders,name='myorders'),
+    path('orderview/<str:t_no>',views.orderview,name='orderview')
    
 
 ]

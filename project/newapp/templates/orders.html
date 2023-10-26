@@ -1,0 +1,64 @@
+{% extends "main.html" %}
+
+
+
+
+
+
+{% block content %}
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="card">
+                <div class="card-body shadow ">
+                    <div class="card-header">
+                        <h2>my orders</h2>
+
+                    </div>
+                    
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Order Date</th>
+                                <th>Tracking Number</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                                    
+                                
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for item in orders %}
+                            <tr>
+                                
+                                <td>{{ item.created_at}}</td>
+                                <td>{{ item.tracking_no }}</td>
+                                <td>{{ item.totalprice}}</td>
+                                <td>{{ item.status }}</td>
+                                <td>
+                                    <a class="btn btn-success" href="{% url 'orderview' item.tracking_no %}">view</a>
+                                </td>
+                               
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div> 
+        
+        
+</div>
+
+ 
+
+{% endblock content %}

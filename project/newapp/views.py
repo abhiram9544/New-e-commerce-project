@@ -243,3 +243,17 @@ def placeorder(request):
         messages.success(request,"your order placed")    
 
     return redirect('home')
+
+
+def myorders(request):
+
+    orders=order.objects.filter(user=request.user)
+    context={'orders': orders}
+    return render (request, "orders.html",context)
+
+def orderview(request,t_no):
+    Order=order.objects.filter(tracking_no=t_no).filter(user=request.user).first()
+    Orderitem=orderitem.objects.filter(order=Order)
+    context = {'order':Order,'orderitems':Orderitem}
+
+    return render(request, "orderview.html",context)
