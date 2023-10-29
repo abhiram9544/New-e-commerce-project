@@ -257,3 +257,26 @@ def orderview(request,t_no):
     context = {'order':Order,'orderitems':Orderitem}
 
     return render(request, "orderview.html",context)
+
+
+def productlistajax(request):
+    products = Product.objects.filter(status=0).values_list('name',flat=True)
+    productlist=list(products)
+    return JsonResponse (productlist,safe=False)
+
+
+def searchproducts(request):
+    if request.method == 'POST':
+        searchedterm = request.POST.get('productsearch')
+        if searchedterm == "":
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            products=Product.objects.filter(name__contains=searchedterm).first()
+            if products:
+                return redirect('collections/'+products.category.slug+'/'+products.slug)
+            else:
+                messages.info(request,"no products found")
+                return redirect(request.META.get('HTTP_REFERER'))
+
+
+    return redirect(request.META.get('HTTP_REFERER'))

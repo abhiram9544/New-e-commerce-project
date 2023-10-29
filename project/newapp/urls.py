@@ -24,7 +24,9 @@ urlpatterns = [
 
 
     path('myorders',views.myorders,name='myorders'),
-    path('orderview/<str:t_no>',views.orderview,name='orderview')
-   
+    path('orderview/<str:t_no>',views.orderview,name='orderview'),
+
+    path('productlist',views.productlistajax),
+    path('searchproducts',views.searchproducts,name='searchproducts')
 
 ]
