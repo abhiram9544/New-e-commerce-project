@@ -37,7 +37,10 @@ def loginn(request):
     return render (request,'login.html')
  
 def home(request):
-    return render (request,'home.html')
+
+    trending_product = Product.objects.filter(trending=1)
+    context ={'trending_product':trending_product}
+    return render (request,'home.html',context)
 
 
 
@@ -87,7 +90,7 @@ def addtocart(request):
 
 
             else:
-                return JsonResponse({'status':'no suv=ch product found'})
+                return JsonResponse({'status':'no such product found'})
         else:
             return JsonResponse({'status':'login required'})  
         

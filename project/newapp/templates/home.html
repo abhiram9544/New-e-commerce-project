@@ -11,4 +11,69 @@
 
     <a href="{% url 'logout' %}" class="btn btn-cuccess"> logout</a>
     <h1>{{request.user.username}}</h1>
+    
+    <div class="container my-5">
+        <h1>Trending</h1>
+        <div class="row ">
+            <div class="col-md-12">
+               
+                <div class="row owl-carousel owl-theme">
+                    {% for item in trending_product %}
+                    <div class="item">
+                        <div class="card">
+                            
+                            <div class="card-body">
+                                <a href="{% url 'productview' item.category.slug item.slug %}">
+                                <div class="category-image">
+                                    <img src="{{ item.product_image.url }}" alt="">
+    
+                                </div>
+                                <h4>{{item.name}}</h4>
+                                <span  class="text-dark float-start">{{item.selling_price}}</span>
+                                 <span class="float-end mb-3">
+                                    
+                                </span>
+                            </div>
+                            </a>    
+                        </div>
+    
+    
+                    </div>
+        
+                    
+                    
+                    {% endfor %}
+    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+   
+
 {% endblock content %}
+
+{% block scripts %}
+<script>
+
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:20,
+    
+    
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+})
+</script>
+
+{% endblock scripts %}
