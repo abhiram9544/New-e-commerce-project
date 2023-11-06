@@ -7,18 +7,18 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+<div class="container ">
+    <div class="row ">
+        <div class="col-md-12" >
             <h1>collections</h1>
-            <div class="row">
+            <div class="row ">
                 {% for item in category %}
-                <div class="col-md-4">
-                    <div class="card">
+                <div class="col-md-4 mt-3">
+                    <div class="card w-100 ">
                         <a href="{% url 'collectionview' item.slug %}" style="text-decoration: none; " class="text-dark">
                         <div class="card-body">
-                            <div class="category-image">
-                                <img src="{{ item.image.url }}" alt="">
+                            <div class="category-image w-100">
+                                <img src="{{ item.image.url }}" class="w-100" alt="">
 
                             </div>
                             <h4 >{{item.name}}</h4>
@@ -39,7 +39,6 @@
         </div>
     </div>
 </div>
-
 
 
 {% endblock content %}

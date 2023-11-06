@@ -25,7 +25,7 @@
 
     {% endblock content %}
     <a href="https://wa.me/+919567669274?text=I'm%20interested%20in%20your%20car%20for%20sale" id="whatsapp" target="_blank">
-        <img src="{% static '/images/whatsapp.jpg' %} " alt="whatsapp logo" width="60px" style="bottom: 5%; left: 5%;  position: fixed;">
+        <img src="{% static '/images/new.gif' %} " alt="whatsapp logo" width="60px" style="bottom: 5%; left: 5%;  position: fixed;">
     </a>
     <script src="{% static "/js/jquery-3.7.1.min.js" %}"></script>
     <script src="{% static "/js/custom.js" %}"></script>
@@ -73,7 +73,7 @@
     {% block scripts %}
 
     {% endblock scripts %}
-  
-    
+    {% comment  %} razor pay checkout{% endcomment %}
+    <script src="{% static "/js/checkout.js" %}"></script>
 </body>
 </html>

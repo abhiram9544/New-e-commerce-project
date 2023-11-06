@@ -39,7 +39,10 @@ def loginn(request):
 def home(request):
 
     trending_product = Product.objects.filter(trending=1)
-    context ={'trending_product':trending_product}
+    category=Category.objects.all()
+    
+   
+    context ={'trending_product':trending_product,'category':category,}
     return render (request,'home.html',context)
 
 
@@ -67,7 +70,11 @@ def productview(request,cate_slug,prod_slug):
     if(Category.objects.filter(slug=cate_slug,status=0)):
         if(Product.objects.filter(slug=prod_slug,status=0)):
             prod=Product.objects.filter(slug=prod_slug,status=0)
-            context={'prod':prod}
+    pro=Product.objects.filter(slug=prod_slug)
+    for p in pro:
+            discount= 100-(p.selling_price/p.product_price)*100
+            
+            context={'prod':prod,'discount':discount}
     return render (request,'productview.html',context)
 
 def addtocart(request):
@@ -213,6 +220,7 @@ def placeorder(request):
         neworder.pincode=request.POST.get('pincode')
 
         neworder.payment_mode=request.POST.get('payment_mode')
+        neworder.payment_id=request.POST.get('payment_id')
 
 
         Cart=cart.objects.filter(user=request.user)
@@ -244,6 +252,11 @@ def placeorder(request):
         #to clear user cart
         cart.objects.filter(user=request.user).delete()
         messages.success(request,"your order placed")    
+
+
+        paymode=request.POST.get('payment_mode')
+        if (paymode == "paid by razorpay"):
+            return JsonResponse({"status":"your order placed"})
 
     return redirect('home')
 
@@ -283,3 +296,16 @@ def searchproducts(request):
 
 
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+def razorpaycheck(request):
+    Cart=cart.objects.filter(user=request.user)
+    total_price=0
+    for item in Cart:
+        total_price=total_price +item.product.selling_price * item.product_qty
+
+    return JsonResponse({
+        'total_Price':total_price
+    })
+

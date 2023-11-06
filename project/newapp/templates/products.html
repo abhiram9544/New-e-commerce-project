@@ -13,16 +13,24 @@
             <h1>collections</h1>
             <div class="row">
                 {% for item in products %}
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
-                        <a href="{% url "productview" item.category.slug item.slug %}">
+                        <a href="{% url "productview" item.category.slug item.slug %}" style="text-decoration: none;">
                         <div class="card-body">
-                            <div class="category-image">
-                                <img src="{{ item.product_image.url }}" alt="">
+                            <div class="category-image w-100">
+                                <img src="{{ item.product_image.url }}" alt="" class="w-100">
 
                             </div>
-                            <h4>{{item.name}}</h4>
-                            <span>{{item.selling_price}}</span>
+                            <h4 class="text-dark text-center" style="font-size: 20px;">{{item.name}}</h4>
+                            <span class="float-start text-decoration-line-through  fs-8 text-dark " ><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"/>
+                              </svg>{{item.product_price|stringformat:'d'}}/-</span>
+
+
+                            <span class="float-end text-dark fs-5"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-currency-rupee mb-2" viewBox="0 0 16 16">
+                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"/>
+                              </svg><b>{{item.selling_price|stringformat:'d'}}</b>/-</span>
+                            
 
                         </div>
                         </a>    

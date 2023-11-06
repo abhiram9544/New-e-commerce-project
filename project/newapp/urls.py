@@ -27,6 +27,9 @@ urlpatterns = [
     path('orderview/<str:t_no>',views.orderview,name='orderview'),
 
     path('productlist',views.productlistajax),
-    path('searchproducts',views.searchproducts,name='searchproducts')
+    path('searchproducts',views.searchproducts,name='searchproducts'),
+    path('proceed-to-pay',views.razorpaycheck),
+
+    
 
 ]

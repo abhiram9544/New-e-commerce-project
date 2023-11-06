@@ -15,33 +15,38 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
+                                <span style="font-size: 25px; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: red;">-{{discount|stringformat:'d'}}%</span>
+                                
                                 {% for item in prod %}
 
-                                {% if item.tag %}
+                                <!-- {% if item.tag %}
                                 <label class="product-viewtag">{{item.tag}}</label>
                                 
-                                {% endif %}
-                                <div id="carouselExample" class="carousel slide">
-                                    <div class="carousel-inner">
-                                      <div class="carousel-item active">
+                                {% endif %} -->
+                                {% if item.trending %}
+                                    <label for="trending" style="font-size: 16px;" class="float-end badge bg-danger trending_tag">trending</label>
+                                    {% endif %}
+                                <div id="carouselExample" class="carousel slide w-100 "   >
+                                    <div class="carousel-inner  " >
+                                      <div class="carousel-item active " >
                                         <img src="{{item.product_image.url}}" class="image col-xs-6
-                                col-sm-12 col-lg-12 mt-5  text-sm-center w-100 h-55" alt="">
+                                            col-sm-12 col-lg-12 mt-5  text-sm-center w-100 " alt="">
+                                      </div>
+                                      <div class="carousel-item ">
+                                        <img src="{{item.product_image1.url}}" class="image col-xs-6
+                                            col-sm-12 col-lg-12 mt-5  text-sm-center w-100" alt="">
                                       </div>
                                       <div class="carousel-item">
-                                        <img src="{{item.product_image.url}}" class="image col-xs-6
-                                col-sm-12 col-lg-12 mt-5  text-sm-center w-100 h-55" alt="">
-                                      </div>
-                                      <div class="carousel-item">
-                                        <img src="{{product.product_image.url}}" class="image col-xs-6
-                                col-sm-12 col-lg-12 mt-5  text-sm-center w-100 h-55" alt="">
+                                        <img src="{{item.product_image2.url}}" class="image col-xs-6
+                                                col-sm-12 col-lg-12 mt-5  text-sm-center w-100 " alt="">
                                       </div>
                                     </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <button class="carousel-control-prev " type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                      <span class="carousel-control-prev-icon " aria-hidden="true"></span>
                                       <span class="visually-hidden">Previous</span>
                                     </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <button class="carousel-control-next "  type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                      <span class="carousel-control-next-icon "  aria-hidden="true"></span>
                                       <span class="visually-hidden">Next</span>
                                     </button>
                                   </div>
@@ -51,31 +56,39 @@
                             </div>    
                             <div class="col-md-8">
                                 <h2 class="mb-0">
+                                    
                                     {{item.name}}
-                                    {% if item.trending %}
-                                    <label for="trending" style="font-size: 16px;" class="float-end badge bg-danger trending_tag">{{item.trending}}</label>
-                                    {% endif %}
+                                    <!-- {% if item.trending %}
+                                    <label for="trending" style="font-size: 16px;" class="float-end badge bg-danger trending_tag">trending</label>
+                                    {% endif %} -->
                                 </h2>
                                 <hr>
-                                <label for="" class="me-3">original price:<s>rs {{item.product_price}}</s></label>
-                                <label for="" class="me-3">selling price:rs {{item.selling_price}}</label>
-                                <p class="mt-3">
+                                
+
+                                <label for="" class="me-3" style="font-size: 25px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-currency-rupee mb-2" viewBox="0 0 16 16">
+                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"/>
+                                  </svg>{{item.selling_price|stringformat:'d'}}/-</label>
+
+                                  <label for="" class="me-3" style="font-size: 20px; color: red;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-currency-rupee mb-2" viewBox="0 0 16 16">
+                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4v1.06Z"/>
+                                  </svg><s>{{item.product_price|stringformat:'d'}}</s></label>
+                                <p class="mt-3" style="font-size: 17px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                                     {{item.small_description}}
 
                                 </p>
                                 <hr>
                                 {% if item.quantity > 0 %}
-                                <label for="" class="badge bg-success">instock</label>
+                                <label for="" style="font-size: 20px;" class="badge bg-success mt-3 ms-3">instock</label>
                                 {% else %}
                                 <label for=""> out of stock</label>
 
                                 {% endif %}
-                                <div class="row mt-2">
+                                <div class="row mt-3">
                                     <div class="col-md-3">
                                         {% csrf_token %}
                                         <input type="hidden" value="{{ item.id }}" class="prod_id">
-                                        <label for="quantity" >quantity</label>
-                                        <div class="input-group text-center mb-3" style="width: 130px;">
+                                        <label for="quantity" style="font-size: 18px;" class="ms-4" ><B>Quantity</B></label>
+                                        <div class="input-group text-center mb-3 mt-2" style="width: 130px;">
                                             <button class="input-group-text decrement-button">-</button>
                                             <input type="text" name="quantity" class="form-control qty-input text-center" value="1">
                                             <button class="input-group-text increment-button">+</button>
@@ -85,24 +98,34 @@
                                     <div class="col-md-9">
                                         <br>
                                         {% if item.quantity > 0 %}
-                                            <button type="button" class="btn btn-primary me-3 float-start addtocartbtn" >add to cart <i class="fa fa-shopping-cart"></i></button>
+                                            <button type="button" class="btn btn-primary me-3 float-start addtocartbtn mt-2" ><b>Add To Cart</b> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                              </svg></button>
 
                                         {% endif %}
-                                            <button type="button" class="btn btn-success me-3 float-start addtowishlistbtn" >add to wishlist <i></i></button>
+                                            <button type="button" class="btn btn-success me-3 float-start addtowishlistbtn mt-2" ><b>Add To Wishlist</b> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                              </svg></button>
 
 
 
                                     </div>
 
                                 </div>
+                                <div class="col-md-12">
+                                    <h3 style="font-size: 25px;">Product Details</h3>
+                                    <p class="mt-3" style="font-size: 17px;  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                                        {{item.description}}
+                                    </p>
+                                </div>
 
                             </div>
-                            <div class="col-md-12">
-                                <h3>description</h3>
+                            <!-- <div class="col-md-12">
+                                <h3 style="font-size: 25px;">Product Details</h3>
                                 <p class="mt-3">
                                     {{item.description}}
                                 </p>
-                            </div>
+                            </div> -->
                                 {% endfor %} 
 
                             
